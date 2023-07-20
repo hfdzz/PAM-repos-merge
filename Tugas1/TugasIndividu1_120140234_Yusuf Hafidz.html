@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf Hafidz - 120140234</title>
+</head>
+<body>
+    <table id="table" border="1">
+        <thead>
+            <th>
+                No.
+            </th>
+            <th>
+                Nama
+            </th>
+            <th>
+                NIM
+            </th>
+            <th>
+                Nilai
+            </th>
+            <th>
+                Nilai Mutu
+            </th>
+        </thead>
+    </table>
+
+    <script>
+        // SCRIPT INISIALISASI
+        function randEntry(seed){
+            let alphabet = "abcdefghijklmnopqrstuvwxyz";
+            let nama = alphabet[seed%26].toUpperCase() + alphabet[seed%26] + alphabet[Math.pow (seed, 2)%26] + alphabet[Math.pow (seed, 3)%26];
+            return {
+                nama: nama,
+                nim: (123 + seed - 1).toString(),
+                nilai: seed % 100 * 10
+            }
+        }
+
+        let data = [
+            {
+                nama: "Boy",
+                nim:'123',
+                nilai: 60    
+            },
+            {
+                nama: "Aldi",
+                nim:'124',
+                nilai: 70  
+            },
+            {
+                nama: "Ade",
+                nim:'125',
+                nilai: 40  
+            },
+            {
+                nama: "Randy",
+                nim:'126',
+                nilai: 90
+            }
+        ]
+        for (let i = 5; i <= 10; i++) {
+            data.push(randEntry(i));
+        }
+
+        // SCRIPT TUGAS
+        function nilaiMutu(nilai){
+            if (nilai >= 80) {
+                return "A";
+            } else if (nilai >= 70) {
+                return "AB";
+            } else if (nilai >= 60) {
+                return "B";
+            } else if (nilai >= 50) {
+                return "BC";
+            } else if (nilai >= 40) {
+                return "C";
+            } else if (nilai >= 10) {
+                return "D";
+            } else {
+                return "E";
+            }
+        }
+
+        function renderTable(){
+            let table = document.getElementById("table");
+            data.forEach((item, index) => {
+                let row = table.insertRow(index + 1);
+                let no = row.insertCell(0);
+                let nama = row.insertCell(1);
+                let nim = row.insertCell(2);
+                let nilai = row.insertCell(3);
+                let mutu = row.insertCell(4);
+                no.innerHTML = index + 1;
+                nama.innerHTML = item.nama;
+                nim.innerHTML = item.nim;
+                nilai.innerHTML = item.nilai;
+                mutu.innerHTML = nilaiMutu(item.nilai);
+            });
+        }
+
+        renderTable();
+
+    </script>
+</body>
+</html>
